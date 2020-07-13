@@ -1,7 +1,7 @@
 package main
 
-import "github.com/diegomagdaleno/cheemit/cmd"
+import "github.com/diegomagdaleno/cheemit/lib"
 
 func main() {
-	cmd.Execute()
+	lib.AddCheems("/Users/me/Desktop/test.png", "/Users/me/Downloads/3nzkub.png")
 }

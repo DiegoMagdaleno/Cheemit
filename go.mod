@@ -3,7 +3,7 @@ module github.com/diegomagdaleno/cheemit
 go 1.14
 
 require (
-	github.com/disintegration/imaging v1.6.2 // indirect
+	github.com/disintegration/imaging v1.6.2
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/mitchellh/mapstructure v1.3.2 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
