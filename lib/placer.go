@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image"
 	"log"
-	"math"
 
 	"github.com/disintegration/imaging"
 )
@@ -39,9 +38,7 @@ func AddCheems(origImg, cheems string) {
 	bgDimensions := src.Bounds().Max
 	markDimensions := cheemsFit.Bounds().Max
 
-	bgAspectRatio := math.Round(float64(bgDimensions.X) / float64(bgDimensions.Y))
-
-	xPos, yPos := CalcCheemsPosition(bgDimensions, markDimensions, bgAspectRatio)
+	xPos, yPos := CalcCheemsPosition(bgDimensions, markDimensions)
 
 	PlaceImg(outName, origImg, cheems, "754x502", fmt.Sprintf("%dx%d", xPos, yPos))
 
