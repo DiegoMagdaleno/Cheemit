@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/diegomagdaleno/cheemit/lib"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +12,13 @@ var rootCmd = &cobra.Command{
 	Use:   "cheemit",
 	Short: "Cheemit takes an image and puts internet's favorite dog on top of it!",
 	Run: func(cmd *cobra.Command, args []string) {
-		// Do Stuff Here
+		var (
+			originalImage   = args[0]
+			outputImagePath = args[1]
+		)
+
+		lib.AddCheems(originalImage, outputImagePath)
+
 	},
 }
 
