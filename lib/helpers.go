@@ -51,3 +51,8 @@ func CalcCheemsPosition(origDimentions, cheemsDimentions image.Point) (int, int)
 
 	return origX - cheemsX, origY - cheemsY
 }
+
+func calculateName(path string) string {
+	splitedPath := strings.Split(path, "/")
+	return splitedPath[len(splitedPath)-1]
+}

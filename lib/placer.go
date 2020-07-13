@@ -29,7 +29,9 @@ func PlaceImg(outName, origImg, cheemsImg, cheemsDimentions, locationDimentions 
 }
 
 func AddCheems(origImg, cheems string) {
-	outName := fmt.Sprintf("cheemed-%s", "test.png")
+
+	baseImgName := calculateName(cheems)
+	outName := fmt.Sprintf("cheemed-%s", baseImgName)
 
 	src := OpenImage(origImg)
 
