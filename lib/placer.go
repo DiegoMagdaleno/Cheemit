@@ -35,14 +35,16 @@ func AddCheems(origImg, cheems string) {
 
 	src := OpenImage(origImg)
 
-	cheemsFit := ResizeImage(cheems, "754x502")
+	calculatedDimentions := calculateCheemsSize(src.Bounds().Max)
+
+	cheemsFit := ResizeImage(cheems, calculatedDimentions)
 
 	bgDimensions := src.Bounds().Max
 	markDimensions := cheemsFit.Bounds().Max
 
 	xPos, yPos := CalcCheemsPosition(bgDimensions, markDimensions)
 
-	PlaceImg(outName, origImg, cheems, "754x502", fmt.Sprintf("%dx%d", xPos, yPos))
+	PlaceImg(outName, origImg, cheems, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
 
-	fmt.Printf("Cheemified '%s'  image '%s' with Cheems dimensions %s.\n", cheems, origImg, "754x502")
+	fmt.Printf("Cheemified '%s'  image '%s' with Cheems dimensions %s.\n", cheems, origImg, calculatedDimentions)
 }
