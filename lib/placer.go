@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image"
 
-	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/disintegration/imaging"
@@ -24,10 +23,14 @@ func PlaceImg(outName, origImg, cheemsImg, cheemsDimentions, locationDimentions 
 	err := imaging.Save(dst, outName)
 
 	if err != nil {
-		log.Panic(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while attemping to save the image")
 	}
 
-	log.Infof("Placed cheems on image '%s'\n", origImg)
+	log.WithFields(log.Fields{
+		"Original Image": origImg,
+	}).Info("Cheems was placed on image!")
 }
 
 func AddCheems(origImg, cheems string) {
@@ -48,7 +51,7 @@ func AddCheems(origImg, cheems string) {
 
 	PlaceImg(outName, origImg, cheems, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
 
-	log.WithFields(logrus.Fields{
+	log.WithFields(log.Fields{
 		"Cheems dimentions": calculatedDimentions,
 	}).Infof("Image '%s' was cheemified successfully!\n", origImg)
 }

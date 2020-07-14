@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"image"
 	"io/ioutil"
-	"log"
 	"os"
 	"strconv"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/disintegration/imaging"
 )
@@ -19,13 +20,17 @@ func ParseCoordinates(input, delimeter string) (int, int) {
 	x, err := strconv.Atoi(cordArray[0])
 
 	if err != nil {
-		log.Fatal(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while converting dimentions of X from string to int.")
 	}
 
 	y, err := strconv.Atoi(cordArray[1])
 
 	if err != nil {
-		log.Fatal(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while converting dimentions of Y from string to int.")
 	}
 
 	return x, y
@@ -35,7 +40,9 @@ func ParseCoordinates(input, delimeter string) (int, int) {
 func OpenImage(path string) image.Image {
 	src, err := imaging.Open(path)
 	if err != nil {
-		log.Fatal(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while opening the desired image.")
 	}
 	return src
 }
@@ -83,7 +90,9 @@ func calculateTempDir() string {
 	supported on Windows :/ */
 	file, err := ioutil.TempFile(os.TempDir(), "cheemit-")
 	if err != nil {
-		log.Panic(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while trying to process a temporal file.")
 	}
 	return file.Name() + ".png"
 }
