@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"fmt"
 	"image"
 	"log"
 	"strconv"
@@ -55,4 +56,18 @@ func CalcCheemsPosition(origDimentions, cheemsDimentions image.Point) (int, int)
 func calculateName(path string) string {
 	splitedPath := strings.Split(path, "/")
 	return splitedPath[len(splitedPath)-1]
+}
+
+func calculateCheemsSize(origImageSize image.Point) string {
+	originalX := origImageSize.X
+	originalY := origImageSize.Y
+
+	// We want to calculate the 10% of an image to place cheems so we do that with the following:
+	tenPerOfX := originalX / 100 * 30
+	tenPerOfY := originalY / 100 * 30
+
+	s1 := strconv.Itoa(tenPerOfX)
+	s2 := strconv.Itoa(tenPerOfY)
+
+	return fmt.Sprintf("%vx%v", s1, s2)
 }
