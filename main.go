@@ -1,6 +1,8 @@
 package main
 
-import "github.com/diegomagdaleno/cheemit/cmd"
+import (
+	"github.com/diegomagdaleno/cheemit/cmd"
+)
 
 func main() {
 	cmd.Execute()

@@ -62,7 +62,7 @@ func calculateCheemsSize(origImageSize image.Point) string {
 	originalX := origImageSize.X
 	originalY := origImageSize.Y
 
-	// We want to calculate the 10% of an image to place cheems so we do that with the following:
+	// We want to calculate the 30% of an image to place cheems so we do that with the following:
 	tenPerOfX := originalX / 100 * 30
 	tenPerOfY := originalY / 100 * 30
 
@@ -70,4 +70,8 @@ func calculateCheemsSize(origImageSize image.Point) string {
 	s2 := strconv.Itoa(tenPerOfY)
 
 	return fmt.Sprintf("%vx%v", s1, s2)
+}
+
+func calculateFontHeight(dimentionX, dimentionY int) float64 {
+	return float64(((dimentionX + dimentionY) / 2) / 100 * 10)
 }
