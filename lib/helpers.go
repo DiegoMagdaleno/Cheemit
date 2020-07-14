@@ -3,7 +3,9 @@ package lib
 import (
 	"fmt"
 	"image"
+	"io/ioutil"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 
@@ -74,4 +76,14 @@ func calculateCheemsSize(origImageSize image.Point) string {
 
 func calculateFontHeight(dimentionX, dimentionY int) float64 {
 	return float64(((dimentionX + dimentionY) / 2) / 100 * 10)
+}
+
+func calculateTempDir() string {
+	/* Keep windows compatibility originally it was planned to load this to memory but syscalls where not
+	supported on Windows :/ */
+	file, err := ioutil.TempFile(os.TempDir(), "cheemit-")
+	if err != nil {
+		log.Panic(err)
+	}
+	return file.Name() + ".png"
 }

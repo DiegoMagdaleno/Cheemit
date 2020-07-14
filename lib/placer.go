@@ -3,7 +3,9 @@ package lib
 import (
 	"fmt"
 	"image"
-	"log"
+
+	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/disintegration/imaging"
 )
@@ -25,7 +27,7 @@ func PlaceImg(outName, origImg, cheemsImg, cheemsDimentions, locationDimentions 
 		log.Panic(err)
 	}
 
-	fmt.Printf("Placed cheems on image '%s\n' ", origImg)
+	log.Infof("Placed cheems on image '%s'\n", origImg)
 }
 
 func AddCheems(origImg, cheems string) {
@@ -46,5 +48,7 @@ func AddCheems(origImg, cheems string) {
 
 	PlaceImg(outName, origImg, cheems, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
 
-	fmt.Printf("Cheemified '%s'  image '%s' with Cheems dimensions %s.\n", cheems, origImg, calculatedDimentions)
+	log.WithFields(logrus.Fields{
+		"Cheems dimentions": calculatedDimentions,
+	}).Infof("Image '%s' was cheemified successfully!\n", origImg)
 }

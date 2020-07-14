@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"image"
 	"log"
 	"strconv"
 	"strings"
@@ -8,7 +9,7 @@ import (
 	"github.com/fogleman/gg"
 )
 
-func CreateText(text, textDimentions string) {
+func CreateText(text, textDimentions, savePath string) image.Image {
 	splitDimentions := strings.Split(textDimentions, "x")
 	dimenX, err := strconv.Atoi(splitDimentions[0])
 	if err != nil {
@@ -19,7 +20,7 @@ func CreateText(text, textDimentions string) {
 		log.Panic("Error while parsing the text dimentions to int")
 	}
 	imageSession := gg.NewContext(dimenX, dimenY)
-	imageSession.SetRGBA(0, 0, 0, 0.1)
+	imageSession.SetRGBA(0, 0, 0, 0)
 	imageSession.Clear()
 	fontHeight := calculateFontHeight(dimenX, dimenY)
 	if err = imageSession.LoadFontFace("/Users/me/Library/Fonts/Anton-Regular.ttf", fontHeight); err != nil {
@@ -39,5 +40,5 @@ func CreateText(text, textDimentions string) {
 	}
 	imageSession.SetRGB(1, 1, 1)
 	imageSession.DrawStringAnchored(text, float64(dimenX/2), float64(dimenY/2), 0.5, 0.5)
-	imageSession.SavePNG("test.png")
+	return imageSession.Image()
 }
