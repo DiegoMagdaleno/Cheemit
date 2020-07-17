@@ -9,7 +9,7 @@ PREFIX ?= /usr/local
 .PHONY: build
 build:
 	@echo "Building $(GOFILES) to ./bin"
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -ldflags="-X main.prefix=${PREFIX}" -o bin/$(GONAME) $(GOFILES) 
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -ldflags="-X github.com/diegomagdaleno/cheemit/lib.prefix=${PREFIX}" -o bin/$(GONAME) $(GOFILES) 
 
 .PHONY: get
 get:
@@ -20,6 +20,8 @@ install:
 	$(MAKE) -C .
 	@install -d $(DESTDIR)$(PREFIX)/bin
 	@install -m 777 ./bin/cheemit $(DESTDIR)$(PREFIX)/bin
+	@install -d $(DESTDIR)$(PREFIX)/share/cheemit/font/
+	@install -m 777 ./resources/fonts/Anton-Regular.ttf $(DESTDIR)$(PREFIX)/share/cheemit/font/
 
 .PHONY: run
 run:

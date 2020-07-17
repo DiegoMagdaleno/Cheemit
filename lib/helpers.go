@@ -13,6 +13,8 @@ import (
 	"github.com/disintegration/imaging"
 )
 
+var prefix string
+
 func ParseCoordinates(input, delimeter string) (int, int) {
 
 	cordArray := strings.Split(input, delimeter)
@@ -95,4 +97,8 @@ func calculateTempDir() string {
 		}).Fatal("An error ocurred while trying to process a temporal file.")
 	}
 	return file.Name() + ".png"
+}
+
+func whereIsTheFont() string {
+	return fmt.Sprintf("%s/share/cheemit/font/Anton-Regular.ttf", prefix)
 }

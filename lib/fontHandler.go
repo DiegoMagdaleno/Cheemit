@@ -23,7 +23,8 @@ func CreateText(text, textDimentions, savePath string) image.Image {
 	imageSession.SetRGBA(0, 0, 0, 0)
 	imageSession.Clear()
 	fontHeight := calculateFontHeight(dimenX, dimenY)
-	if err = imageSession.LoadFontFace("/Users/me/Library/Fonts/Anton-Regular.ttf", fontHeight); err != nil {
+	fontLocation := whereIsTheFont()
+	if err = imageSession.LoadFontFace(fontLocation, fontHeight); err != nil {
 		log.Panic("Error while loading fontface, is the font face installed?")
 	}
 	imageSession.SetRGB(0, 0, 0)
