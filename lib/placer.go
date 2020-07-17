@@ -33,7 +33,7 @@ func PlaceImg(outName, origImg, cheemsImg, cheemsDimentions, locationDimentions 
 	}).Info("Cheems was placed on image!")
 }
 
-func AddCharacter(origImg, character string) {
+func AddCharacter(origImg, character, desiredText string) {
 
 	baseImgName := calculateName(origImg)
 	characterPath := getCharacterPath(character)
@@ -55,11 +55,4 @@ func AddCharacter(origImg, character string) {
 	log.WithFields(log.Fields{
 		"Cheems dimentions": calculatedDimentions,
 	}).Infof("Image '%s' was cheemified successfully!\n", origImg)
-}
-
-func AddText(desiredText, dimentions string) {
-	textImgPath := calculateTempDir()
-	theText := CreateText("testing", "100x100", textImgPath)
-	imaging.Save(theText, "test.png")
-	PlaceImg("test2.png", "/Users/me/Documents/Projects/cheemit/cheemed-3nzkub.png", "cocckckckc.png", "100x100", fmt.Sprintf("%dx%d", 100, 100))
 }

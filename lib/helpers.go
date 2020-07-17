@@ -3,8 +3,6 @@ package lib
 import (
 	"fmt"
 	"image"
-	"io/ioutil"
-	"os"
 	"strconv"
 	"strings"
 
@@ -83,22 +81,6 @@ func calculateCheemsSize(origImageSize image.Point) string {
 	return fmt.Sprintf("%vx%v", s1, s2)
 }
 
-func calculateFontHeight(dimentionX, dimentionY int) float64 {
-	return float64(((dimentionX + dimentionY) / 2) / 100 * 10)
-}
-
-func calculateTempDir() string {
-	/* Keep windows compatibility originally it was planned to load this to memory but syscalls where not
-	supported on Windows :/ */
-	file, err := ioutil.TempFile(os.TempDir(), "cheemit-")
-	if err != nil {
-		log.WithFields(log.Fields{
-			"error": err,
-		}).Fatal("An error ocurred while trying to process a temporal file.")
-	}
-	return file.Name() + ".png"
-}
-
 func getCharacterPath(character string) string {
 	switch character {
 	case "cheems":
@@ -111,8 +93,4 @@ func getCharacterPath(character string) string {
 		}).Fatal("Not a valid character")
 	}
 	return ""
-}
-
-func whereIsTheFont() string {
-	return fmt.Sprintf("%s/share/cheemit/font/Anton-Regular.ttf", prefix)
 }
