@@ -33,25 +33,33 @@ func PlaceImg(outName, origImg, cheemsImg, cheemsDimentions, locationDimentions 
 	}).Info("Cheems was placed on image!")
 }
 
-func AddCheems(origImg, cheems string) {
+func AddCharacter(origImg, character string) {
 
-	baseImgName := calculateName(cheems)
+	baseImgName := calculateName(origImg)
+	characterPath := getCharacterPath(character)
 	outName := fmt.Sprintf("cheemed-%s", baseImgName)
 
 	src := OpenImage(origImg)
 
 	calculatedDimentions := calculateCheemsSize(src.Bounds().Max)
 
-	cheemsFit := ResizeImage(cheems, calculatedDimentions)
+	cheemsFit := ResizeImage(characterPath, calculatedDimentions)
 
 	bgDimensions := src.Bounds().Max
 	markDimensions := cheemsFit.Bounds().Max
 
 	xPos, yPos := CalcCheemsPosition(bgDimensions, markDimensions)
 
-	PlaceImg(outName, origImg, cheems, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
+	PlaceImg(outName, origImg, characterPath, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
 
 	log.WithFields(log.Fields{
 		"Cheems dimentions": calculatedDimentions,
 	}).Infof("Image '%s' was cheemified successfully!\n", origImg)
+}
+
+func AddText(desiredText, dimentions string) {
+	textImgPath := calculateTempDir()
+	theText := CreateText("testing", "100x100", textImgPath)
+	imaging.Save(theText, "test.png")
+	PlaceImg("test2.png", "/Users/me/Documents/Projects/cheemit/cheemed-3nzkub.png", "cocckckckc.png", "100x100", fmt.Sprintf("%dx%d", 100, 100))
 }

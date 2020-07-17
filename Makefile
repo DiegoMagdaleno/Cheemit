@@ -22,6 +22,9 @@ install:
 	@install -m 777 ./bin/cheemit $(DESTDIR)$(PREFIX)/bin
 	@install -d $(DESTDIR)$(PREFIX)/share/cheemit/font/
 	@install -m 777 ./resources/fonts/Anton-Regular.ttf $(DESTDIR)$(PREFIX)/share/cheemit/font/
+	@install -d $(DESTDIR)$(PREFIX)/share/cheemit/image
+	@install -m 777 ./resources/images/Cheems.png $(DESTDIR)$(PREFIX)/share/cheemit/image
+	@install -m 777 ./resources/images/Doge.png $(DESTDIR)$(PREFIX)/share/cheemit/image
 
 .PHONY: run
 run:

@@ -99,6 +99,20 @@ func calculateTempDir() string {
 	return file.Name() + ".png"
 }
 
+func getCharacterPath(character string) string {
+	switch character {
+	case "cheems":
+		return fmt.Sprintf("%s/share/cheemit/image/Cheems.png", prefix)
+	case "doge":
+		return fmt.Sprintf("%s/share/cheemit/image/Doge.png", prefix)
+	default:
+		log.WithFields(log.Fields{
+			"character": character,
+		}).Fatal("Not a valid character")
+	}
+	return ""
+}
+
 func whereIsTheFont() string {
 	return fmt.Sprintf("%s/share/cheemit/font/Anton-Regular.ttf", prefix)
 }
