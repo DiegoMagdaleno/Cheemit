@@ -3,6 +3,9 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/diegomagdaleno/cheemit/lib"
 	"github.com/spf13/cobra"
@@ -18,11 +21,15 @@ var rootCmd = &cobra.Command{
 		var (
 			originalImage = args[0]
 		)
-		switch character {
+		switch character = strings.ToLower(character); character {
 		case "cheems":
 			lib.AddCharacter(originalImage, "cheems")
 		case "doge":
 			lib.AddCharacter(originalImage, "doge")
+		default:
+			log.WithFields(log.Fields{
+				"character": character,
+			}).Fatal("Not a valid character")
 		}
 	},
 }
