@@ -33,7 +33,7 @@ func PlaceImg(outName, origImg, cheemsImg, cheemsDimentions, locationDimentions 
 	}).Info("Cheems was placed on image!")
 }
 
-func AddCharacter(origImg, character, desiredText string) {
+func AddCharacter(origImg, character string) {
 
 	baseImgName := calculateName(origImg)
 	characterPath := getCharacterPath(character)

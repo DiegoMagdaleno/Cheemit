@@ -23,9 +23,9 @@ var rootCmd = &cobra.Command{
 		)
 		switch character = strings.ToLower(character); character {
 		case "cheems":
-			lib.AddCharacter(originalImage, "cheems", "hey")
+			lib.AddCharacter(originalImage, "cheems")
 		case "doge":
-			lib.AddCharacter(originalImage, "doge", "hey")
+			lib.AddCharacter(originalImage, "doge")
 		default:
 			log.WithFields(log.Fields{
 				"character": character,
