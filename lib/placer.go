@@ -43,7 +43,6 @@ func AddCharacter(origImg, character string) {
 
 	calculatedDimentions := calculateCheemsSize(src.Bounds().Max)
 
-	cheemsFit := ResizeImage(cheems, calculatedDimentions)
 	cheemsFit := ResizeImage(characterPath, calculatedDimentions)
 
 	bgDimensions := src.Bounds().Max
@@ -51,9 +50,6 @@ func AddCharacter(origImg, character string) {
 
 	xPos, yPos := CalcCheemsPosition(bgDimensions, markDimensions)
 
-	PlaceImg(outName, origImg, cheems, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
-
-	fmt.Printf("Cheemified '%s'  image '%s' with Cheems dimensions %s.\n", cheems, origImg, calculatedDimentions)
 	PlaceImg(outName, origImg, characterPath, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
 
 	log.WithFields(log.Fields{
