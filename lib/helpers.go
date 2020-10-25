@@ -71,6 +71,7 @@ func calculateCheemsSize(origImageSize image.Point) string {
 	originalX := origImageSize.X
 	originalY := origImageSize.Y
 
+	// We want to calculate the 10% of an image to place cheems so we do that with the following:
 	// We want to calculate the 30% of an image to place cheems so we do that with the following:
 	tenPerOfX := originalX / 100 * 30
 	tenPerOfY := originalY / 100 * 30
@@ -81,16 +82,4 @@ func calculateCheemsSize(origImageSize image.Point) string {
 	return fmt.Sprintf("%vx%v", s1, s2)
 }
 
-func getCharacterPath(character string) string {
-	switch character {
-	case "cheems":
-		return fmt.Sprintf("%s/share/cheemit/image/Cheems.png", prefix)
-	case "doge":
-		return fmt.Sprintf("%s/share/cheemit/image/Doge.png", prefix)
-	default:
-		log.WithFields(log.Fields{
-			"character": character,
-		}).Fatal("Not a valid character")
-	}
-	return ""
-}
+
