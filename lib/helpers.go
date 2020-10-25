@@ -3,12 +3,15 @@ package lib
 import (
 	"fmt"
 	"image"
-	"log"
 	"strconv"
 	"strings"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/disintegration/imaging"
 )
+
+var prefix string
 
 func ParseCoordinates(input, delimeter string) (int, int) {
 
@@ -17,13 +20,17 @@ func ParseCoordinates(input, delimeter string) (int, int) {
 	x, err := strconv.Atoi(cordArray[0])
 
 	if err != nil {
-		log.Fatal(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while converting dimentions of X from string to int.")
 	}
 
 	y, err := strconv.Atoi(cordArray[1])
 
 	if err != nil {
-		log.Fatal(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while converting dimentions of Y from string to int.")
 	}
 
 	return x, y
@@ -33,7 +40,9 @@ func ParseCoordinates(input, delimeter string) (int, int) {
 func OpenImage(path string) image.Image {
 	src, err := imaging.Open(path)
 	if err != nil {
-		log.Fatal(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while opening the desired image.")
 	}
 	return src
 }
@@ -63,6 +72,7 @@ func calculateCheemsSize(origImageSize image.Point) string {
 	originalY := origImageSize.Y
 
 	// We want to calculate the 10% of an image to place cheems so we do that with the following:
+	// We want to calculate the 30% of an image to place cheems so we do that with the following:
 	tenPerOfX := originalX / 100 * 30
 	tenPerOfY := originalY / 100 * 30
 
@@ -71,3 +81,5 @@ func calculateCheemsSize(origImageSize image.Point) string {
 
 	return fmt.Sprintf("%vx%v", s1, s2)
 }
+
+

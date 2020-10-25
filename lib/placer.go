@@ -3,7 +3,8 @@ package lib
 import (
 	"fmt"
 	"image"
-	"log"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/disintegration/imaging"
 )
@@ -22,15 +23,20 @@ func PlaceImg(outName, origImg, cheemsImg, cheemsDimentions, locationDimentions 
 	err := imaging.Save(dst, outName)
 
 	if err != nil {
-		log.Panic(err)
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("An error ocurred while attemping to save the image")
 	}
 
-	fmt.Printf("Placed cheems on image '%s\n' ", origImg)
+	log.WithFields(log.Fields{
+		"Original Image": origImg,
+	}).Info("Cheems was placed on image!")
 }
 
-func AddCheems(origImg, cheems string) {
+func AddCharacter(origImg, character string) {
 
-	baseImgName := calculateName(cheems)
+	baseImgName := calculateName(origImg)
+	characterPath := getCharacterPath(character)
 	outName := fmt.Sprintf("cheemed-%s", baseImgName)
 
 	src := OpenImage(origImg)
@@ -38,6 +44,7 @@ func AddCheems(origImg, cheems string) {
 	calculatedDimentions := calculateCheemsSize(src.Bounds().Max)
 
 	cheemsFit := ResizeImage(cheems, calculatedDimentions)
+	cheemsFit := ResizeImage(characterPath, calculatedDimentions)
 
 	bgDimensions := src.Bounds().Max
 	markDimensions := cheemsFit.Bounds().Max
@@ -47,4 +54,9 @@ func AddCheems(origImg, cheems string) {
 	PlaceImg(outName, origImg, cheems, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
 
 	fmt.Printf("Cheemified '%s'  image '%s' with Cheems dimensions %s.\n", cheems, origImg, calculatedDimentions)
+	PlaceImg(outName, origImg, characterPath, calculatedDimentions, fmt.Sprintf("%dx%d", xPos, yPos))
+
+	log.WithFields(log.Fields{
+		"Cheems dimentions": calculatedDimentions,
+	}).Infof("Image '%s' was cheemified successfully!\n", origImg)
 }
