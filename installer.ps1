@@ -1,6 +1,7 @@
 
 Set-Variable -Name CheemitPath -Value "$env:APPDATA\Cheemit \image"
 Set-Variable -Name CheemitPathPrograms -Value "C:\Program Files\DiegoMagdaleno\cheemit"
+Set-Variable -Name GoName -Value (Split-Path (Split-Path -Path $pwd\installer.ps1) -Leaf )
 
 if ( -not (Test-Path -Path $CheemitPath -PathType Container)) {
     try {
@@ -27,6 +28,6 @@ if ( -not (Test-Path -Path $CheemitPathPrograms -PathType Container )) {
     "Directory for cheemit in programs already existed at $CheemitPathPrograms, will update contents of the directory after build."
 }
 
-go build .
+go build -o "bin/$GoName"
 
 Copy-Item -Path ".\cheemit.exe" -Destination "$CheemitPathPrograms\cheemit.exe"
