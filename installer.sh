@@ -2,6 +2,7 @@
 
 PREFIX=/usr/local
 ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+GONAME="$(basename "$(PWD)")"
 
 
 function usage() {
@@ -17,6 +18,7 @@ function usage() {
 
 if [ "$1" == "" ]; then
     usage
+    exit 1
 fi
 
 while [ "$1" != "" ]; do
@@ -43,7 +45,7 @@ for image in $ABSOLUTE_PATH/resources/images/*;do
     install -m 777 "$image" "$PREFIX/share/cheemit/image"
 done
 
-go build -ldflags="-X github.com/diegomagdaleno/cheemit/lib.prefix=${PREFIX}"
+go build -ldflags="-X github.com/diegomagdaleno/cheemit/lib.prefix=${PREFIX}" -o "bin/$GONAME"
 
-install -m 777 ./cheemit "$PREFIX/bin/cheemit"
+install -m 777 "./bin/$GONAME" "$PREFIX/bin/cheemit"
 
