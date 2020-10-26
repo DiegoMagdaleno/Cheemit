@@ -1,5 +1,5 @@
 
-Set-Variable -Name CheemitPath -Value "$env:APPDATA\Cheemit\image"
+Set-Variable -Name CheemitPath -Value "$env:APPDATA\Cheemit \image"
 Set-Variable -Name CheemitPathPrograms -Value "C:\Program Files\DiegoMagdaleno\cheemit"
 
 if ( -not (Test-Path -Path $CheemitPath -PathType Container)) {
