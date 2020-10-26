@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - name: Go Release Binary
-        uses: ngs/go-release.action@v1.0.2
+        uses: ./.github/workflows/release.yml
