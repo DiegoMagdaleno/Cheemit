@@ -7,9 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  job:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Go Release Binary
-        uses: ./.github/workflows/release.yml
+    - uses: actions/checkout@v2
+    - uses: ./.github/workflows/release.yml
