@@ -21,4 +21,5 @@ jobs:
         goarch: ${{ matrix.goarch }}
         goversion: "https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz"
         pre_command: "go get -v -t -d ./... "
+        build_command: "go build ldflags=\"-X github.com/diegomagdaleno/cheemit/lib.prefix=/usr/local\" && mkdir -p ./share/cheemit/image && cp ./resources/images/Cheems.png ./share/cheemit/image/Cheems.png && cp ./resources/images/Doge.png ./share/cheemit/image/Doge"
         extra_files: ./resources/images/Cheems.png ./resources/images/Doge.png
